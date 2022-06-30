@@ -1,0 +1,43 @@
+<div class="bg-cyan-400" [ngClass]="(darkModeEnabled$ | async) ? 'dark' : ''">
+  <nav class="p-5 bg-white dark:bg-black shadow md:flex md:items-center md:justify-between">
+    <div class="flex justify-between items-center">
+      <span class="text-2xl font-poppins text-black dark:text-white cursor-pointer">
+        <img
+          [src]="(darkModeEnabled$ | async) ? '../../../../assets/img/logo-white.png' : '../../../../assets/img/logo-black.png'"
+          class="h-10 inline">
+        Chocolates Toros
+      </span>
+
+      <span class="text-3xl cursor-pointer mx-2 md:hidden block text-black dark:text-white">
+        <i *ngIf="!openMenuV" (click)="openMenu(1)" class="fas fa-bars"></i>
+        <i *ngIf="openMenuV" (click)="openMenu(2)" class="fas fa-times"></i>
+      </span>
+    </div>
+
+    <ul class="md:flex md:items-center z-[-1] md:z-auto md:static absolute bg-white dark:bg-black w-full left-0 md:w-auto
+      md:py-0 py-4 md:pl-o pl-7 md:opacity-100 opacity-0 top-[-400px] transition-all ease-in duration-500"
+      [ngClass]="{'top-[30px] opacity-100': openMenuV}">
+      <li class="mx-4 my-6 md:my-0 text-black dark:text-white" [ngClass]="{'inicioMovil': openMenuV}">
+        <a href="#" class="text-xl hover:text-cyan-500 duration-500">Inicio</a>
+      </li>
+      <li class="mx-4 my-6 md:my-0 text-black dark:text-white">
+        <a href="#" class="text-xl hover:text-cyan-500 duration-500">Productos</a>
+      </li>
+      <li class="mx-4 my-6 md:my-0 text-black dark:text-white">
+        <a href="#" class="text-xl hover:text-cyan-500 duration-500">Informacion</a>
+      </li>
+      <!-- <li>
+        <a href="#" class="text-xl hover:text-cyan-500 duration-500">Inicio</a>
+      </li> -->
+
+      <button (click)="toggleDarkMode()" id="dark-mode-toggle" class="rounded-full text-black dark:text-white">
+        <span *ngIf="(darkModeEnabled$ | async) == true"><i class="fas fa-sun"></i></span>
+        <span *ngIf="(darkModeEnabled$ | async) == false"><i class="fas fa-moon"></i></span>
+      </button>
+    </ul>
+  </nav>
+  <div [ngClass]="{'sMenu': openMenuV}">
+    <router-outlet></router-outlet>
+  </div>
+
+</div>
